@@ -4,20 +4,33 @@
 2 return the box when it goes out of the range
 
 */
-const slider = document.getElementById("slider");
+
 const box = document.querySelector("#box");
-let srcResolution = `${1366 * 768}PPI `;
+
 let leftSide = 0;
 let topSide = 0;
 let move = Number(prompt("Enter a number from 1 to 20"));
+let w = window.innerWidth;
+let h = window.innerHeight;
 
 // function to move box
 if (move <= 20 && move >= 0) {
-  if (box.value > leftSide) {
-    alert("cant go more");
-  }
   window.addEventListener("keydown", (e) => {
     console.log(e.key);
+
+    if (leftSide > w) {
+      leftSide = 0;
+    }
+    if (leftSide < 0) {
+      leftSide = w;
+    }
+
+    if (topSide > h) {
+      topSide = 0;
+    }
+    if (topSide < 0) {
+      topSide = h;
+    }
 
     // if (e.key === "ArrowRight") {
     //   leftSide = leftSide + 20;
@@ -59,6 +72,7 @@ if (move <= 20 && move >= 0) {
       default:
         break;
     }
+    box.style.fontSize = "20px";
     box.innerHTML = `left = ${leftSide} <br> top = ${topSide}`;
   });
 } else {
